@@ -1,0 +1,6 @@
+framework module Pods_workoutDonePractice {
+  umbrella header "Pods-workoutDonePractice-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,34 @@
+PODS:
+  - LabelSwitch (0.1.7)
+  - RxCocoa (6.5.0):
+    - RxRelay (= 6.5.0)
+    - RxSwift (= 6.5.0)
+  - RxKeyboard (2.0.0):
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
+  - RxRelay (6.5.0):
+    - RxSwift (= 6.5.0)
+  - RxSwift (6.5.0)
+
+DEPENDENCIES:
+  - LabelSwitch
+  - RxKeyboard
+
+SPEC REPOS:
+  trunk:
+    - LabelSwitch
+    - RxCocoa
+    - RxKeyboard
+    - RxRelay
+    - RxSwift
+
+SPEC CHECKSUMS:
+  LabelSwitch: 97b19eb5e11b27854559374357375134d40c744f
+  RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxKeyboard: 4f5863f43b4ff0cbb2a20b94688d6b80c8a43c14
+  RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
+  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
+
+PODFILE CHECKSUM: 1fd53a1edb40313d7978d103dd0179fa3ed49e84
+
+COCOAPODS: 1.11.3
