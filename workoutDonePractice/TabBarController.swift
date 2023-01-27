@@ -11,12 +11,12 @@ class TabBarController : UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let firstTab = UINavigationController(rootViewController: HomeViewController())
+        let firstTab = HomeViewController()
         let firstTabBarItem = UITabBarItem(title: "홈", image: UIImage(systemName: "mic"), tag: 0)
         firstTab.tabBarItem = firstTabBarItem
         let secondTab = SecondViewController()
         secondTab.tabBarItem = UITabBarItem(title: "홈", image: UIImage(systemName: "heart.fill"), tag: 1)
-        let thirdTab = UINavigationController(rootViewController: ThirdViewController())
+        let thirdTab = ThirdViewController()
         let thirdTabBarItem = UITabBarItem(title: "3번째", image: UIImage(systemName: "heart.fill"), tag: 2)
         thirdTab.tabBarItem = thirdTabBarItem
         

@@ -35,6 +35,8 @@
 		A575639A294E09710021816E /* HomeButtonvc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5756399294E09710021816E /* HomeButtonvc.swift */; };
 		A575639C294E097C0021816E /* HomeButtonLessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A575639B294E097C0021816E /* HomeButtonLessVC.swift */; };
 		A575639E294E09980021816E /* HomeButtonCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A575639D294E09980021816E /* HomeButtonCameraViewController.swift */; };
+		A5775B852982FA23000DFC3F /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5775B842982FA23000DFC3F /* CameraViewModel.swift */; };
+		A5775B8729838E3E000DFC3F /* EnterBodyInformationNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5775B8629838E3E000DFC3F /* EnterBodyInformationNavigator.swift */; };
 		A5784F4C29706558007325F3 /* Hero in Frameworks */ = {isa = PBXBuildFile; productRef = A5784F4B29706558007325F3 /* Hero */; };
 		A57DE127294CD92400E1C8C0 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57DE126294CD92400E1C8C0 /* UIViewController.swift */; };
 		A57DE129294CDE5400E1C8C0 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57DE128294CDE5400E1C8C0 /* UserDefaults.swift */; };
@@ -48,6 +50,8 @@
 		A591D1CD2958B0D900070E6F /* HomeButtonLessPhotosFrameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A591D1CC2958B0D900070E6F /* HomeButtonLessPhotosFrameViewController.swift */; };
 		A591D1CF2958B12300070E6F /* HomeButtonPhotosFrameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A591D1CE2958B12300070E6F /* HomeButtonPhotosFrameViewController.swift */; };
 		A5954B3D293CFA5700EC893D /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5954B3C293CFA5700EC893D /* Color.swift */; };
+		A5A2158B29812A9F001AF6F8 /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A2158A29812A9F001AF6F8 /* UINavigationController.swift */; };
+		A5A2158D2981660A001AF6F8 /* EnterBodyInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A2158C2981660A001AF6F8 /* EnterBodyInformationViewModel.swift */; };
 		A5AE04782942525E00DB3D3A /* ImageSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AE04772942525E00DB3D3A /* ImageSelectionViewController.swift */; };
 		A5B773422950AABB00E583CA /* WorkoutResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B773412950AABB00E583CA /* WorkoutResultView.swift */; };
 		A5C1FD58294B871D00F721B8 /* EnterBodyInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C1FD57294B871D00F721B8 /* EnterBodyInformationViewController.swift */; };
@@ -56,6 +60,8 @@
 		A5F384F8294A136F00D919E4 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F384F7294A136F00D919E4 /* OnboardingViewController.swift */; };
 		A5F384FA294A138300D919E4 /* OnboardingVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F384F9294A138300D919E4 /* OnboardingVIewModel.swift */; };
 		A5F384FC294A165000D919E4 /* OnboardingSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F384FB294A165000D919E4 /* OnboardingSlide.swift */; };
+		A5FF279C2976F68A0059C312 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FF279B2976F68A0059C312 /* UIViewController+Rx.swift */; };
+		A5FF279E2976F6E50059C312 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FF279D2976F6E50059C312 /* ViewModelType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +89,8 @@
 		A5756399294E09710021816E /* HomeButtonvc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButtonvc.swift; sourceTree = "<group>"; };
 		A575639B294E097C0021816E /* HomeButtonLessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButtonLessVC.swift; sourceTree = "<group>"; };
 		A575639D294E09980021816E /* HomeButtonCameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButtonCameraViewController.swift; sourceTree = "<group>"; };
+		A5775B842982FA23000DFC3F /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
+		A5775B8629838E3E000DFC3F /* EnterBodyInformationNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterBodyInformationNavigator.swift; sourceTree = "<group>"; };
 		A57DE126294CD92400E1C8C0 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		A57DE128294CDE5400E1C8C0 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		A58F576F295EC2DD005F994B /* MyRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +100,8 @@
 		A591D1CC2958B0D900070E6F /* HomeButtonLessPhotosFrameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButtonLessPhotosFrameViewController.swift; sourceTree = "<group>"; };
 		A591D1CE2958B12300070E6F /* HomeButtonPhotosFrameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButtonPhotosFrameViewController.swift; sourceTree = "<group>"; };
 		A5954B3C293CFA5700EC893D /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		A5A2158A29812A9F001AF6F8 /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
+		A5A2158C2981660A001AF6F8 /* EnterBodyInformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterBodyInformationViewModel.swift; sourceTree = "<group>"; };
 		A5AE04772942525E00DB3D3A /* ImageSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectionViewController.swift; sourceTree = "<group>"; };
 		A5B773412950AABB00E583CA /* WorkoutResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutResultView.swift; sourceTree = "<group>"; };
 		A5C1FD57294B871D00F721B8 /* EnterBodyInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterBodyInformationViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +110,8 @@
 		A5F384F7294A136F00D919E4 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		A5F384F9294A138300D919E4 /* OnboardingVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVIewModel.swift; sourceTree = "<group>"; };
 		A5F384FB294A165000D919E4 /* OnboardingSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSlide.swift; sourceTree = "<group>"; };
+		A5FF279B2976F68A0059C312 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
+		A5FF279D2976F6E50059C312 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		B080079120810950F295EB4A /* Pods-workoutDonePractice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-workoutDonePractice.release.xcconfig"; path = "Target Support Files/Pods-workoutDonePractice/Pods-workoutDonePractice.release.xcconfig"; sourceTree = "<group>"; };
 		C14AF2B55143DBD56330F003 /* Pods_workoutDonePractice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_workoutDonePractice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFD10F6C5D8648329290C91A /* Pods-workoutDonePractice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-workoutDonePractice.debug.xcconfig"; path = "Target Support Files/Pods-workoutDonePractice/Pods-workoutDonePractice.debug.xcconfig"; sourceTree = "<group>"; };
@@ -139,11 +151,13 @@
 			children = (
 				A526185129391740004A6793 /* HomeViewController.swift */,
 				A571CDBC295F1F970044A4C0 /* HomeViewModel.swift */,
+				A5C1FD57294B871D00F721B8 /* EnterBodyInformationViewController.swift */,
+				A5A2158C2981660A001AF6F8 /* EnterBodyInformationViewModel.swift */,
+				A5775B8629838E3E000DFC3F /* EnterBodyInformationNavigator.swift */,
 				A5B773402950AA7B00E583CA /* HomeViews */,
 				A52FE3F72948B6A5007C7F32 /* CameraOrPhoto */,
 				A5C50F6A294796F000FB2ACB /* Alerts */,
 				A5AE04762942523A00DB3D3A /* ImageSelection */,
-				A5C1FD57294B871D00F721B8 /* EnterBodyInformationViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -169,22 +183,23 @@
 		A526183A29390BC2004A6793 /* workoutDonePractice */ = {
 			isa = PBXGroup;
 			children = (
-				A526183B29390BC2004A6793 /* AppDelegate.swift */,
-				A526183D29390BC2004A6793 /* SceneDelegate.swift */,
-				A526183F29390BC2004A6793 /* ViewController.swift */,
 				A526184429390BC3004A6793 /* Assets.xcassets */,
 				A526184629390BC3004A6793 /* LaunchScreen.storyboard */,
 				A526184929390BC3004A6793 /* Info.plist */,
-				A5722AF3295DF99500DF463C /* Model */,
+				A5FF27972976F4740059C312 /* App */,
+				A526183F29390BC2004A6793 /* ViewController.swift */,
+				A5FF279A2976F5A70059C312 /* Utils */,
 				A57DE125294CD90700E1C8C0 /* Extention */,
+				A5722AF3295DF99500DF463C /* Model */,
 				A5F384F4294A133600D919E4 /* Onboarding */,
 				A58F576E295EC2B5005F994B /* MyRecord */,
 				A508B575293C8A5B005BE0F0 /* Home */,
 				A526184F293916CD004A6793 /* TabBarController.swift */,
 				A526185C293A7CD2004A6793 /* SecondViewController.swift */,
-				A526185E293A7E8F004A6793 /* Storyboard.storyboard */,
 				A5D48614293C81E500CB5EEB /* ThirdViewController.swift */,
-				A5954B3C293CFA5700EC893D /* Color.swift */,
+				A5FF27982976F4E40059C312 /* View */,
+				A5FF27992976F4ED0059C312 /* ViewModel */,
+				A526185E293A7E8F004A6793 /* Storyboard.storyboard */,
 			);
 			path = workoutDonePractice;
 			sourceTree = "<group>";
@@ -213,6 +228,8 @@
 				A57DE128294CDE5400E1C8C0 /* UserDefaults.swift */,
 				A5756397294E03F20021816E /* Device.swift */,
 				A567CF71295B50A30043E822 /* PHAsset.swift */,
+				A5954B3C293CFA5700EC893D /* Color.swift */,
+				A5A2158A29812A9F001AF6F8 /* UINavigationController.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -233,6 +250,7 @@
 				A52FE3FA2948BBCD007C7F32 /* PreviewView.swift */,
 				A5756399294E09710021816E /* HomeButtonvc.swift */,
 				A575639B294E097C0021816E /* HomeButtonLessVC.swift */,
+				A5775B842982FA23000DFC3F /* CameraViewModel.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -285,6 +303,38 @@
 				A5672C84294A1B7E0078C0CE /* OnboardingCollectionViewCell.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		A5FF27972976F4740059C312 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A526183B29390BC2004A6793 /* AppDelegate.swift */,
+				A526183D29390BC2004A6793 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A5FF27982976F4E40059C312 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A5FF27992976F4ED0059C312 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A5FF279A2976F5A70059C312 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A5FF279B2976F68A0059C312 /* UIViewController+Rx.swift */,
+				A5FF279D2976F6E50059C312 /* ViewModelType.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		D5708AAEDD925001E111593D /* Pods */ = {
@@ -437,6 +487,9 @@
 				A5C50F6C2947972600FB2ACB /* DeleteWorkoutRecordViewController.swift in Sources */,
 				A5F384FA294A138300D919E4 /* OnboardingVIewModel.swift in Sources */,
 				A526184029390BC2004A6793 /* ViewController.swift in Sources */,
+				A5A2158B29812A9F001AF6F8 /* UINavigationController.swift in Sources */,
+				A5775B8729838E3E000DFC3F /* EnterBodyInformationNavigator.swift in Sources */,
+				A5775B852982FA23000DFC3F /* CameraViewModel.swift in Sources */,
 				A57DE129294CDE5400E1C8C0 /* UserDefaults.swift in Sources */,
 				A575639C294E097C0021816E /* HomeButtonLessVC.swift in Sources */,
 				A52FE3F92948B6B2007C7F32 /* HomeButtonLessCameraViewController.swift in Sources */,
@@ -447,6 +500,7 @@
 				A5722AF5295DF9B000DF463C /* Data.swift in Sources */,
 				A5F384F8294A136F00D919E4 /* OnboardingViewController.swift in Sources */,
 				A5756398294E03F20021816E /* Device.swift in Sources */,
+				A5FF279E2976F6E50059C312 /* ViewModelType.swift in Sources */,
 				A591D1CD2958B0D900070E6F /* HomeButtonLessPhotosFrameViewController.swift in Sources */,
 				A591D1CF2958B12300070E6F /* HomeButtonPhotosFrameViewController.swift in Sources */,
 				A5261850293916CD004A6793 /* TabBarController.swift in Sources */,
@@ -464,6 +518,8 @@
 				A5AE04782942525E00DB3D3A /* ImageSelectionViewController.swift in Sources */,
 				A575639E294E09980021816E /* HomeButtonCameraViewController.swift in Sources */,
 				A591D1C52958804B00070E6F /* PhotoViewController.swift in Sources */,
+				A5FF279C2976F68A0059C312 /* UIViewController+Rx.swift in Sources */,
+				A5A2158D2981660A001AF6F8 /* EnterBodyInformationViewModel.swift in Sources */,
 				A5954B3D293CFA5700EC893D /* Color.swift in Sources */,
 				A5672C85294A1B7E0078C0CE /* OnboardingCollectionViewCell.swift in Sources */,
 				A575639A294E09710021816E /* HomeButtonvc.swift in Sources */,

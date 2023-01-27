@@ -8,6 +8,7 @@
 import Foundation
 import RealmSwift
 
+
 //class Category : Object {
 //    @objc dynamic var name : String = ""
 //    let items = List<Item>()
@@ -56,11 +57,11 @@ import RealmSwift
 //    case woman = "여자"
 //}
 //
-class BodyInfoText : Object {
-    @objc dynamic var createdDate : String = ""
-    @objc dynamic var weight : Int = 0
-    @objc dynamic var fatPercentage : Int = 0
-    @objc dynamic var skelatalMusleMass : Int = 0
+class BodyInfoText: Object {
+    @Persisted dynamic var createdDate: String = ""
+    @Persisted dynamic var weight: Int?
+    @Persisted dynamic var fatPercentage: Int?
+    @Persisted dynamic var skelatalMusleMass: Int?
  
 }
 ////몸무게

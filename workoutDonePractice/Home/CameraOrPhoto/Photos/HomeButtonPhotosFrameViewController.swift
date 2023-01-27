@@ -20,29 +20,13 @@ class HomeButtonPhotosFrameViewController : UIViewController {
         case womanUpperBodyImage = 5
         case womanWholeBodyImage = 6
     }
-//    var isSelected : Bool = false {
-//        didset {
-//            if isSelected == true {
-//
-//            }
-//            else {
-//
-//            }
-//        }
-//    }
+
     
     
     var viewModel : PhotosViewModel? = nil
 
     let disposeBag = DisposeBag()
     // MARK: - PROPERTIES
-    private let barView = UIView()
-    
-    private let backButton = UIButton().then {
-        $0.setTitle("뒤로가기", for: .normal)
-        $0.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
-        $0.setTitleColor(UIColor.white, for: .normal)
-    }
     
     private let imageTypeBackView = UIView().then {
         $0.backgroundColor = .blue
@@ -107,6 +91,10 @@ class HomeButtonPhotosFrameViewController : UIViewController {
     // MARK: - LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithDefaultBackground()
+        appearance.backgroundColor = UIColor.white.withAlphaComponent(0)
+        
         imageTypeScrollView.showsHorizontalScrollIndicator = false
         
         defaultImageTypeButton.tag = ImageTypeButtons.defaultImage.rawValue
@@ -119,7 +107,6 @@ class HomeButtonPhotosFrameViewController : UIViewController {
         
         view.addSubview(imageView)
         view.addSubview(saveButton)
-        imageView.addSubview(backButton)
         view.addSubview(imageTypeBackView)
         view.backgroundColor = .systemBackground
         
@@ -137,13 +124,9 @@ class HomeButtonPhotosFrameViewController : UIViewController {
         
         
         imageView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalToSuperview()
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(self.view.frame.width * 4 / 3)
-        }
-        backButton.snp.makeConstraints { make in
-            make.top.equalTo(imageView.snp.top).offset(13)
-            make.leading.equalTo(imageView.snp.leading).offset(13)
         }
         saveButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -201,15 +184,11 @@ class HomeButtonPhotosFrameViewController : UIViewController {
         actions()
     }
     func actions() {
-        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         [defaultImageTypeButton, firstManUpperBodyImageTypeButton, secondManUpperBodyImageTypeButton, manWholeBodyImageTypeButton, womanUpperBodyImageTypeButton, womanWholeBodyTypeButton].forEach({
             $0.addTarget(self, action: #selector(selectImageTypeButtonTapped(sender: )), for: .touchUpInside)
         })
         
-    }
-    @objc func backButtonTapped() {
-        dismiss(animated: true)
     }
     @objc func saveButtonTapped() {
 //        self.view.window?.rootViewController?.presentedViewController!.dismiss(animated: true, completion: nil)

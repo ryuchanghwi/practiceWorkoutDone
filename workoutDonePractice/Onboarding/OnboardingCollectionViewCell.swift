@@ -8,6 +8,8 @@
 import UIKit
 import SnapKit
 
+// Review: Cell -> reuse 관점에서 필요한 것 (prepareForReuse() 알아보기)
+
 class OnboardingCollectionViewCell : UICollectionViewCell {
     let onboardingImageView = UIImageView()
     

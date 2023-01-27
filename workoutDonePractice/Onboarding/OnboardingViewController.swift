@@ -57,11 +57,11 @@ class OnboardingViewController : UIViewController {
         onboardingCollectionView.isPagingEnabled = true
         onboardingCollectionView.showsHorizontalScrollIndicator = false
         onboardingCollectionView.register(OnboardingCollectionViewCell.self, forCellWithReuseIdentifier: "OnboardingCollectionViewCell")
-        layout()
+        setupLayout()
         actions()
     }
     
-    func layout() {
+    func setupLayout() {
         nextButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(24)
@@ -85,12 +85,12 @@ class OnboardingViewController : UIViewController {
     
     // MARK: - ACTIONS
     func actions() {
-        nextButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
+        nextButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
     }
-    @objc func startButtonClicked() {
+    @objc func startButtonTapped() {
         if currentPage == onboardingViewModel.slides.count - 1 {
             print("메인 뷰로 가기")
-            let mainViewController = TabBarController()
+            let mainViewController = UINavigationController(rootViewController: TabBarController())
             changeRootViewController(mainViewController)
 //            UserDefaults.standard.hasOnboarded = true
         }

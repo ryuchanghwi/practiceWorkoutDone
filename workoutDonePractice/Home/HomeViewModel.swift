@@ -10,7 +10,56 @@ import RealmSwift
 import RxSwift
 import RxCocoa
 
+protocol RealmService {
+    func searchBodyData(date: String) -> Results<BodyInfoText>?
+}
+class RealmConnect: RealmService {
+    func searchBodyData(date: String) -> Results<BodyInfoText>? {
+        let realm = try! Realm()
+        var bodyInfoText : Results<BodyInfoText>?
+        bodyInfoText = realm.objects(BodyInfoText.self)
+        bodyInfoText = bodyInfoText?.filter("createdDate CONTAINS %@", date)
+        return bodyInfoText
+    }
+}
+
+
+
 class HomeViewModel {
+    let realm = try! Realm()
+    var bodyInfoText : Results<BodyInfoText>?
+    
+    init(bodyInfoText: Results<BodyInfoText>? = nil) {
+        self.bodyInfoText = realm.objects(BodyInfoText.self)
+        print("HomeViewModel - init")
+    }
+    
+    lazy var dateSubject = BehaviorSubject(value: dateFormatter.string(from: Date()))
+    ///질문
+    lazy var readBodyData = dateSubject.map { value in
+        let bodyInfo = self.bodyInfoText?.filter("createdDate CONTAINS %@", value)
+        return bodyInfo
+    }
+    
+//    lazy var readData =
+//    struct Input {
+//        let selectedDate: Driver<String>
+//    }
+//
+//    struct Output {
+//        let read: Driver<Results<BodyInfoText>?>
+//    }
+//    func transform(input: Input) -> Output {
+//        let read = input.selectedDate.map { value in
+//            let bodyInfo = self.bodyInfoText?.filter("createdDate CONTAINS %@", value)
+//            return bodyInfo
+//        }
+//        return Output(read: read)
+//    }
+//    let input: Input
+
+    
+
     var currentPage : Date? //현재 달
     var selectedDate: Date = Date()
     var monthDateFormatter: DateFormatter = {
@@ -24,31 +73,14 @@ class HomeViewModel {
         return df
     }()
     
-    let realm = try! Realm()
-    var bodyInfoText : Results<BodyInfoText>?
+
     
-    var weightValue = BehaviorRelay(value: 0)
-    var fatPercentageValue = BehaviorRelay(value: 0)
-    var skelatalMusleMassValue = BehaviorRelay(value: 0)
     
     func loadBodyInfoTexts() {
         bodyInfoText = realm.objects(BodyInfoText.self)
+        
     }
     
-    func updateBodyInfoText() {
-        weightValue.accept(bodyInfoText?[0].weight ?? 0)
-        fatPercentageValue.accept(bodyInfoText?[0].fatPercentage ?? 0)
-        skelatalMusleMassValue.accept(bodyInfoText?[0].skelatalMusleMass ?? 0)
-    }
-    
-    func createdBodyInfoText(bodyInfoText : BodyInfoText) {
-        do {
-            try realm.write {
-                realm.add(bodyInfoText)
-            }
-        } catch {
-            print("Error saving categoryt \(error)")
-        }
-    }
+
 }
 

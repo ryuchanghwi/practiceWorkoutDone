@@ -23,6 +23,9 @@ class ImageSelectionViewController : UIViewController {
         $0.setTitle("사진 촬영하기", for: .normal)
         $0.backgroundColor = UIColor(hex: 0x000000)
     }
+
+    
+    var rootView: HomeViewController?
     
     
     // MARK: - LIFECYCLE
@@ -73,28 +76,24 @@ class ImageSelectionViewController : UIViewController {
         if DeviceManager.shared.isHomeButtonDevice() || DeviceManager.shared.isSimulatorIsHomeButtonDevice() {
             print("홈버튼이 있는 기종")
             let homeButtonCameraViewController = HomeButtonCameraViewController()
-            homeButtonCameraViewController.modalTransitionStyle = .coverVertical
-            homeButtonCameraViewController.modalPresentationStyle = .fullScreen
-            present(homeButtonCameraViewController, animated: true)
+            dismiss(animated: false) {
+                self.rootView?.navigationController?.pushViewController(homeButtonCameraViewController, animated: true)
+            }
         }
         else {
             print("홈 버튼이 없는 기종")
-            let homeButtonVC = HomeButtonLessCameraViewController()
-            homeButtonVC.modalTransitionStyle = .coverVertical
-            homeButtonVC.modalPresentationStyle = .fullScreen
-            present(homeButtonVC, animated: true)
+            let homeButtonLessCameraViewController = HomeButtonLessCameraViewController()
+            navigationController?.pushViewController(homeButtonLessCameraViewController, animated: true)
+            dismiss(animated: false) {
+                self.rootView?.navigationController?.pushViewController(homeButtonLessCameraViewController, animated: true)
+            }
         }
     }
-    //        let cameraViewController = CameraViewController()
-    //        cameraViewController.modalTransitionStyle = .crossDissolve
-    //        cameraViewController.modalPresentationStyle = .fullScreen
-    //        present(cameraViewController, animated: true)
     @objc func galleryButtonTapped() {
-        print("클릭")
         let photoViewController = PhotoViewController()
-        photoViewController.modalTransitionStyle = .coverVertical
-        photoViewController.modalPresentationStyle = .fullScreen
-        present(photoViewController, animated: true)
+        dismiss(animated: false) {
+            self.rootView?.navigationController?.pushViewController(photoViewController, animated: true)
+        }
     }
     @objc func cancelButtonTapped() {
         dismiss(animated: true)
@@ -105,8 +104,8 @@ extension ImageSelectionViewController {
     
 }
 
-struct ImageSelectionViewController_PreViews: PreviewProvider {
-    static var previews: some View {
-        ImageSelectionViewController().toPreview().previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)")) //원하는 VC를 여기다 입력하면 된다.
-    }
-}
+//struct ImageSelectionViewController_PreViews: PreviewProvider {
+//    static var previews: some View {
+//        ImageSelectionViewController().toPreview().previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)")) //원하는 VC를 여기다 입력하면 된다.
+//    }
+//}

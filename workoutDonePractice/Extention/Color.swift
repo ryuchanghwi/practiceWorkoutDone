@@ -9,6 +9,15 @@ import Foundation
 import UIKit
 
 extension UIColor {
+    static var mainOrange = UIColor(hex: 0xF5CDA9)
+}
+
+class ColorClient {
+    let color: UIColor = .mainOrange //활용 예시
+}
+
+
+extension UIColor {
     // MARK: hex code를 이용하여 정의
     // ex. UIColor(hex: 0xF5663F)
     convenience init(hex: UInt, alpha: CGFloat = 1.0) {
@@ -22,7 +31,7 @@ extension UIColor {
     
     // MARK: 메인 테마 색 또는 자주 쓰는 색을 정의
     // ex. label.textColor =  .mainOrange
-    class var mainOrange: UIColor { UIColor(hex: 0xF5CDA9) }
+//    class var mainOrange: UIColor { UIColor(hex: 0xF5CDA9) }
     
     class var textColor: UIColor { UIColor(hex: 0x5F5D59)}
     

@@ -98,6 +98,9 @@ class HomeButtonCameraViewController : UIViewController {
         
         
         
+        let backBarButtonItem = UIBarButtonItem(title: "뒤로가기", style: .plain, target: self, action: nil)
+            backBarButtonItem.tintColor = .black  // 색상 변경
+        self.navigationItem.backBarButtonItem = backBarButtonItem
         view.backgroundColor = .systemBackground
         view.addSubview(preview)
         preview.addSubview(backButton)
@@ -121,6 +124,11 @@ class HomeButtonCameraViewController : UIViewController {
         
 
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = false
+    }
+    
     func actions() {
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         

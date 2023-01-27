@@ -11,7 +11,7 @@ import Photos
 import SnapKit
 import Then
 
-class HomeButtonLessCameraViewController : UIViewController {
+class HomeButtonLessCameraViewController : UIViewController, AVCapturePhotoCaptureDelegate {
     // MARK: - PROPERTIES
     
     let captureSession = AVCaptureSession()
@@ -114,6 +114,10 @@ class HomeButtonLessCameraViewController : UIViewController {
         actions()
         configureUI()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = false
+    }
     // MARK: - ACTIONS
     func actions() {
         backButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
@@ -169,6 +173,7 @@ extension HomeButtonLessCameraViewController {
     }
     
     func configureUI() {
+        
         barView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(0)
             make.leading.equalToSuperview()
@@ -341,6 +346,15 @@ extension HomeButtonLessCameraViewController {
             }
         }
     }
+//    func takePicture() {
+//        DispatchQueue.global(qos: .background).async {
+//            self.photoOutput.capturePhoto(with: AVCapturePhotoSettings(), delegate: self)
+//            self.stopSession()
+//            DispatchQueue.main.async {
+//                
+//            }
+//        }
+//    }
 }
 //
 //extension HomeButtonCameraViewController: AVCapturePhotoCaptureDelegate {

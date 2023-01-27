@@ -17,15 +17,9 @@ import RxSwift
 class HomeViewController : UIViewController {
     let disposeBag = DisposeBag()
     var viewModel = HomeViewModel()
-    var selectedDateValue : String = ""
+    var selectedDateValue: String = ""
+
     
-    var weightValue : Int = 0
-    var fatPercentageValue : Int = 0
-    var skelatalMusleMassValue : Int = 0
-    
-    //realm
-    let realm = try! Realm()
-    var bodyInfoText : Results<BodyInfoText>?
 
 
     // MARK: - PROPERTIES
@@ -39,6 +33,9 @@ class HomeViewController : UIViewController {
     private let calendarView = FSCalendar()
     private let calendarScrollButton = UIButton().then {
         $0.setImage(UIImage(named: "calendarScrollButtonOff"), for: .normal)
+        // Review: selected 상태의 이미지 지정 가능
+        // 네이밍 on/off는 switch에 주로 사용, arrowUp. arrowDown 등이 나을듯
+//        $0.setImage(UIImage(named: "calendarScrollButtonOn"), for: .selected)
     }
     private let monthControlStackView = UIStackView().then {
         $0.axis = .horizontal
@@ -84,9 +81,6 @@ class HomeViewController : UIViewController {
         $0.backgroundColor = .white
     }
 
-    let navigationBar = UINavigationBar()
-    
-
     
     
     // MARK: - LIFECYCLE
@@ -104,8 +98,6 @@ class HomeViewController : UIViewController {
         calendar()
         
         
-        // MARK: - Realm
-        loadBodyInfoTexts()
 
         
 //        let bodyinfoText = BodyInfoText()
@@ -115,49 +107,38 @@ class HomeViewController : UIViewController {
 //        bodyinfoText.skelatalMusleMass = 40
 //
 //        createdBodyInfoText(bodyInfoText: bodyinfoText)
-        
+        bind()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        selectedDateValue = viewModel.dateFormatter.string(from: Date())
+        navigationController?.navigationBar.topItem?.title = "뒤로가기"
+        navigationController?.navigationBar.tintColor = UIColor.red
+        navigationController?.isNavigationBarHidden = true
     }
     
-    // MARK: - rx
-    func loadBodyInfoTexts() {
-        bodyInfoText = realm.objects(BodyInfoText.self)
-        // MARK: - 추가 질문
-//        viewModel.loadBodyInfoTexts()
-//
-//        viewModel.weightValue
-//            .bind(to: rx.weightValue)
-//            .disposed(by: disposeBag)
-//
-//        viewModel.fatPercentageValue
-//            .bind(to: rx.fatPercentageValue)
-//            .disposed(by: disposeBag)
-//        viewModel.skelatalMusleMassValue
-//            .bind(to: rx.skelatalMusleMassValue)
-//            .disposed(by: disposeBag)
-//        recordBaseView.weightInputLabel.text = "\(weightValue) kg"
-//        recordBaseView.skeletalMuscleMassInputLabel.text = "\(skelatalMusleMassValue) kg"
-//        recordBaseView.fatPercentageInputLabel.text = "\(fatPercentageValue) %"
-        
-        
-        print(bodyInfoText, "저장된 데이터들")
+    // MARK: - RXPractice
+    ///질문
+    private func bind() {
+        viewModel.readBodyData
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { value in
+                if let weight = value?.first?.weight {
+                    self.recordBaseView.weightInputLabel.text = String(weight)
+                } else { self.recordBaseView.weightInputLabel.text = "" }
+                if let skeletalMusle = value?.first?.skelatalMusleMass {
+                    self.recordBaseView.skeletalMuscleMassInputLabel.text = String(skeletalMusle)
+                } else { self.recordBaseView.skeletalMuscleMassInputLabel.text = "" }
+                if let fatPercentage = value?.first?.fatPercentage {
+                    self.recordBaseView.fatPercentageInputLabel.text = String(fatPercentage)
+                } else { self.recordBaseView.fatPercentageInputLabel.text = "" }
+            })
+            .disposed(by: disposeBag)
+
     }
-    
-    func createdBodyInfoText(bodyInfoText : BodyInfoText) {
-        do {
-            try realm.write {
-                realm.add(bodyInfoText)
-            }
-        } catch {
-            print("Error saving category \(error)")
-        }
-    }
-    
-    func updateBodyInfoText(bodyInfoText : BodyInfoText) {
-        recordBaseView.weightInputLabel.text = "\(bodyInfoText.weight) KG"
-        recordBaseView.skeletalMuscleMassInputLabel.text = "\(bodyInfoText.skelatalMusleMass) %"
-        recordBaseView.fatPercentageInputLabel.text = "\(bodyInfoText.fatPercentage) kg"
-    }
-    
+
+
+
 
     // MARK: - ACTIONS
     func actions() {
@@ -170,14 +151,14 @@ class HomeViewController : UIViewController {
     }
     @objc func bodyDataEntryButtonTapped() {
         print("클릭")
-        let enterBodyInformationViewController = EnterBodyInformationViewController()
+        let enterBodyInformationViewController = EnterBodyInformationViewController(selectedDate: selectedDateValue)
         enterBodyInformationViewController.modalTransitionStyle = .crossDissolve
         enterBodyInformationViewController.modalPresentationStyle = .overFullScreen
         present(enterBodyInformationViewController, animated: true)
     }
     @objc func ImageButtonTapped() {
-        print("클릭")
         let imageSelectionViewController = ImageSelectionViewController()
+        imageSelectionViewController.rootView = self
         imageSelectionViewController.modalTransitionStyle = .crossDissolve
         imageSelectionViewController.modalPresentationStyle = .overFullScreen
         present(imageSelectionViewController, animated: true)
@@ -392,40 +373,46 @@ extension HomeViewController : FSCalendarDataSource, FSCalendarDelegate, FSCalen
     }
 
 
-
+    // LLDB BreakPoint로 확인 가능
+    // 예상 비즈니스 로직
+    // selectedData -> realm 관련 데이터 꺼냄 -> 기록하기에 반영 (있으면-보여주고 없으면-입력가이드)
+    
+    
+    // viewModel 활용
+    // VC에서 들고있는 selectedData (Subject 타입) -> ViewModel아 이 날짜 선택했어 (VM이 subscribe로 관찰중)
+    // -> ViewModel이 realm에 접근해서 데이터 찾음 -> VC의 기록하기에 반영
+    
+    ///질문-
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+//        let driverSelectedDate = Driver.just(viewModel.dateFormatter.string(from: date))
+//        let input = HomeViewModel.Input(
+//            selectedDate: driverSelectedDate)
         selectedDateValue = viewModel.dateFormatter.string(from: date)
-        print(selectedDateValue)
-        loadBodyInfoTexts() // test
-        bodyInfoText = bodyInfoText?.filter("createdDate CONTAINS %@", selectedDateValue)
-        print(bodyInfoText, "????이거는")
-
-        if bodyInfoText?.count != 0{
-            updateBodyInfoText(bodyInfoText: bodyInfoText?[0] ?? BodyInfoText())
-            
-            // MARK: - 추가질문
-//            viewModel.updateBodyInfoText()
-        }
-        
-    }
-    
-    
-    func calendar(_ calendar: FSCalendar, imageFor date: Date) -> UIImage? {
-        print(selectedDateValue)
-        if selectedDateValue.contains(viewModel.dateFormatter.string(from: date)) {
-            print(selectedDateValue)
-            return UIImage(named: "calendarFrame")
-        }
-
-        if ["2022.12.12"].contains(viewModel.dateFormatter.string(from: date)) {
-            return UIImage(named: "calendarFrame")
-        }
-//        calendarView.reloadData()
-        return nil
-        
+        HomeViewModel().dateSubject.onNext(selectedDateValue)
+        print(selectedDateValue, "dd")
+        print(viewModel.bodyInfoText, "SSSS")
+        print(viewModel.readBodyData, "dddd")
 
 
     }
+    
+    
+//    func calendar(_ calendar: FSCalendar, imageFor date: Date) -> UIImage? {
+//        print(selectedDateValue)
+//        if selectedDateValue.contains(viewModel.dateFormatter.string(from: date)) {
+//            print(selectedDateValue)
+//            return UIImage(named: "calendarFrame")
+//        }
+//
+//        if ["2022.12.12"].contains(viewModel.dateFormatter.string(from: date)) {
+//            return UIImage(named: "calendarFrame")
+//        }
+////        calendarView.reloadData()
+//        return nil
+//        
+//
+//
+//    }
 
         
 }
@@ -448,7 +435,7 @@ extension UIViewController {
 }
 struct MyViewController_PreViews: PreviewProvider {
     static var previews: some View {
-        HomeViewController().toPreview().previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)")) //원하는 VC를 여기다 입력하면 된다.
+        HomeViewController().toPreview().previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
     }
 }
 

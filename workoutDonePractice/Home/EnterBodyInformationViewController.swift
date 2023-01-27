@@ -11,9 +11,20 @@ import SnapKit
 import SwiftUI
 import RxKeyboard
 import RxSwift
+import RxCocoa
 
 class EnterBodyInformationViewController : UIViewController {
     let disposeBag = DisposeBag()
+    var viewModel = EnterBodyInformationViewModel()
+    var selectedDate: String
+    init(selectedDate: String) {
+        self.selectedDate = selectedDate
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     // MARK: - PROPERTIES
     let baseView = UIView().then {
         $0.backgroundColor = UIColor(hex: 0xFFFFFF)
@@ -120,6 +131,97 @@ class EnterBodyInformationViewController : UIViewController {
     // MARK: - LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+        addSubview()
+        
+
+        print(selectedDate, "선택된 날짜")
+        layout()
+        actions()
+        keyboardSetting()
+        bind()
+    }
+    func keyboardSetting() {
+        let offsetValue = UIScreen.main.bounds.height / 2 - 346 / 2
+        RxKeyboard.instance.visibleHeight
+            .drive(onNext: { keyboardHeight in
+                let height = keyboardHeight > 0 ? -keyboardHeight + offsetValue : 0
+                self.baseView.snp.updateConstraints { make in
+                    make.centerY.equalToSuperview().offset(height)
+                }
+                self.view.layoutIfNeeded()
+            })
+            .disposed(by: disposeBag)
+    }
+    
+
+    func actions() {
+        cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func cancelButtonTapped() {
+        dismiss(animated: true)
+    }
+    @objc func saveButtonTapped() {
+//        dismiss(animated: true)
+    }
+    
+    ///질문
+    private func bind() {
+        let driverSelectedDate = Driver.just(selectedDate)
+        let input = EnterBodyInformationViewModel.Input(
+            selectedDate: driverSelectedDate,
+            weightValue: weightTextField.rx.text.orEmpty.asDriver(),
+            skeletalMusleMassValue: skeletalMuscleMassTextField.rx.text.orEmpty.asDriver(),
+            fatPercentageValue: fatPercentageTextField.rx.text.orEmpty.asDriver(),
+            saveTrigger: saveButton.rx.tap.asDriver())
+        let output = viewModel.transform(input: input)
+        
+        output.saveState
+            .drive(onNext: { [weak self] value in
+                if value {
+                    self?.saveButton.isEnabled = true
+                    self?.saveButton.alpha = 1
+                }
+                else {
+                    self?.saveButton.isEnabled = false
+                    self?.saveButton.alpha = 0.7
+                }
+            })
+            .disposed(by: disposeBag)
+        output.save.drive()
+            .disposed(by: disposeBag)
+        
+        output.read.drive(onNext: { [weak self] value in
+            if let weight = value?.first?.weight {
+                self?.weightTextField.text = String(weight)
+            } else { self?.weightTextField.text = "" }
+            if let skeletalMusle = value?.first?.skelatalMusleMass {
+                self?.skeletalMuscleMassTextField.text = String(skeletalMusle)
+            } else { self?.skeletalMuscleMassTextField.text = "" }
+            if let fatPercentage = value?.first?.fatPercentage {
+                self?.fatPercentageTextField.text = String(fatPercentage)
+            } else { self?.fatPercentageTextField.text = "" }
+        })
+            .disposed(by: disposeBag)
+        
+        //        viewModel.readBodyInfoText(date: selectedDate)
+        //        if let weight = (viewModel.bodyInfoText?.first?.weight) {
+        //            weightTextField.text = String(weight)
+        //        } else { weightTextField.text = "" }
+        //        if let skeletalMusle = (viewModel.bodyInfoText?.first?.skelatalMusleMass) {
+        //            skeletalMuscleMassTextField.text = String(skeletalMusle)
+        //        } else { skeletalMuscleMassTextField.text = "" }
+        //        if let fatPercentage = (viewModel.bodyInfoText?.first?.fatPercentage) {
+        //            fatPercentageTextField.text = String(fatPercentage)
+        //        } else { fatPercentageTextField.text = "" }
+    }
+    
+    // MARK: - ACTIONS
+}
+// MARK: - EXTENSIONs
+extension EnterBodyInformationViewController {
+    func addSubview() {
         weightTextField.keyboardType = .numberPad
         skeletalMuscleMassTextField.keyboardType = .numberPad
         fatPercentageTextField.keyboardType = .numberPad
@@ -137,6 +239,9 @@ class EnterBodyInformationViewController : UIViewController {
         view.addSubview(fatPercentageEntireStackView)
         view.addSubview(cancelButton)
         view.addSubview(cancelButton)
+    }
+    
+    func layout() {
         
         [weightLabel, weightTextField].forEach({
             weightStackView.addArrangedSubview($0)
@@ -157,24 +262,7 @@ class EnterBodyInformationViewController : UIViewController {
             fatPercentageEntireStackView.addArrangedSubview($0)
         }
         
-        layout()
-        actions()
-        keyboardSetting()
-    }
-    func keyboardSetting() {
-        let offsetValue = UIScreen.main.bounds.height / 2 - 346 / 2
-        RxKeyboard.instance.visibleHeight
-            .drive(onNext: { keyboardHeight in
-                let height = keyboardHeight > 0 ? -keyboardHeight + offsetValue : 0
-                self.baseView.snp.updateConstraints { make in
-                    make.centerY.equalToSuperview().offset(height)
-                }
-                self.view.layoutIfNeeded()
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    func layout() {
+        
         baseView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
@@ -242,27 +330,6 @@ class EnterBodyInformationViewController : UIViewController {
             make.height.equalTo(24)
         }
     }
-    func actions() {
-        cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
-        
-        saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
-    }
-    @objc func cancelButtonTapped() {
-        dismiss(animated: true)
-    }
-    @objc func saveButtonTapped() {
-        dismiss(animated: true)
-    }
-    
-    // MARK: - ACTIONS
-}
-// MARK: - EXTENSIONs
-extension EnterBodyInformationViewController {
-    
 }
 
-struct EnterBodyInformationViewController_PreViews: PreviewProvider {
-    static var previews: some View {
-        EnterBodyInformationViewController().toPreview().previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)")) //원하는 VC를 여기다 입력하면 된다.
-    }
-}
+
